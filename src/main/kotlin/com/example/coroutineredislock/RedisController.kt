@@ -28,4 +28,25 @@ class RedisController(
         redisService.set(key, value)
         return "ok"
     }
+
+    @GetMapping("/start-lock-test-reactive")
+    suspend fun startLockReactiveTest(): String {
+        redisService.distributedReactiveLockTest()
+        return "ok"
+    }
+
+    @GetMapping("/start-lock-test")
+    suspend fun startLockTest(): String {
+        redisService.distributedLockTest()
+        return "ok"
+    }
+
+    @GetMapping("/lock/{key}")
+    suspend fun startLockTest(
+        @PathVariable("key")
+        key: String
+    ): String {
+        redisService.lock(key)
+        return "ok"
+    }
 }
